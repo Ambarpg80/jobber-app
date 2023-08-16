@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "posts#index"                      #shows all the posts
-  # get "/posts", to: "posts#index"
+  # root "posts#index"                      
+  get "/posts", to: "posts#index"         #shows all the posts
   post "/posts", to: "posts#create"       #creates a job post
   get "/posts/:id", to: "posts#show"      #gets a single post
   patch "/posts/:id", to: "posts#update"
