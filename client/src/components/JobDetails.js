@@ -4,11 +4,11 @@ function JobDetails({job}){
 
 
     return(
-        <div>
-          <ul>
+        <div className={'job_card'}>
+          <h3>{job.title}</h3>
+          <ul id='job_details'>
             <li>{job.company_name}</li> 
             <li>{job.industry}</li>       
-            <li>{job.title}</li>
             <li>{job.salary}</li>
             <li>{job.experience_level}</li>
             <li>{job.location}</li>
