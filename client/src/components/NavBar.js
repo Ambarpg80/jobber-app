@@ -1,24 +1,36 @@
-import React from 'react'
- import { Link } from 'react-router-dom';
+import React, {useState} from 'react'
+ import { NavLink } from 'react-router-dom';
+ 
 
 
 
 function NavBar(){
-    // console.log(alljobs)
-//    const styledButton= {
-//                     position: 'absolute', 
-//                     right: 20, 
-//                     fontSize: "20px",
-//                     alignItems: 'center',
-//                     borderRadius: '5px',
-//                     textDecoration: 'none'};
+  const [isActive, SetIsActive] = useState(false)
+  const login = {
+                    position: 'absolute', 
+                    right: 20, 
+                    fontSize: "20px",
+                    alignItems: 'center',
+                    borderRadius: '5px',
+                    textDecoration: 'none'};
+
+  const logo = {color: 'navy', fontSize: "30px", fontWeight: "bold", textDecoration: 'none'}
+
+  const findNPost = { paddingLeft: "3vh", textDecoration: 'none'}
+ 
+  function handleNav(){
+    SetIsActive(!isActive)
+  }
+
  return(
-        <div >
-          {/* <Link style={{color: 'navy', fontSize: "30px", textDecoration: 'none'}}to="/">Jobber</Link> */}
-          {/* <Link style={{ paddingLeft: "3vh", textDecoration: 'none'}} to="/posts">Find A Job</Link>
-          <Link style={{ paddingLeft: "3vh", textDecoration: 'none'}} to="/users">Post A Job</Link>
-          <Link  style={styledButton} as={Link} to="/me" > Login </Link> className="App-header active"*/}
-        </div>
+        <nav onClick={handleNav} className="App-header active" >
+         <div > 
+          <NavLink style={logo}to="/">Jobber</NavLink>
+          <NavLink style={findNPost} to="/posts">Find A Job</NavLink>
+          <NavLink style={findNPost} to="/posts/new">Post A Job</NavLink>
+          <NavLink  style={login}  to="/me" > Login </NavLink> 
+          </div>
+        </nav>
         
     )
 }
