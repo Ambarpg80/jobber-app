@@ -3,7 +3,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import JobList from "./JobList"
 import Home from "./Home"
-// import NavBar from "./NavBar"
+import LoginForm from "./LoginForm"
+import SignUpForm from './SignUpForm';
 import JobForm from './JobForm';
 
 function App() {
@@ -13,18 +14,18 @@ function App() {
   useEffect(() => {
     fetch("/posts")
       .then(res => res.json())
-      .then(job_posts => setAllJobs(job_posts));
+      .then(jobPosts => setAllJobs(jobPosts));
   }, []);
 
 
   function handleNewPost(newPost){
+    console.log(newPost)
     setAllJobs([...allJobs, newPost])
   }
 
-//   function filteredList(item){
-//   const searchedItem = allJobs.filter(job => job.title.toLowerCase().includes(item.toLowerCase()) ?  job : null)
-//   setAllJobs(searchedItem)
-// }
+ function handleNewUser(newUser){
+   console.log(newUser)
+ } 
 
 
 
@@ -33,8 +34,9 @@ function App() {
       {/* <nav className="App-header "><NavBar/></nav> */}
         <Routes>
           <Route exact path="/" element={<Home  />} > 
-            <Route exact path="posts" element={<JobList alljobs={allJobs} /*onSearch={filteredList}*/ />} />
+            <Route exact path="posts" element={<JobList alljobs={allJobs}  />} />
             <Route path="posts/new" element={<JobForm onSubmission={handleNewPost} />} />
+            <Route path="signup" element={<SignUpForm onSignUp={handleNewUser} />} />
             {/*<Route exact path="*" element={<Error />} /> */}
           </Route>
         </Routes>

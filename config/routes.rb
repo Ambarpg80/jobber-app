@@ -9,13 +9,12 @@ Rails.application.routes.draw do
   patch "/posts/:id", to: "posts#update"
   delete "/posts/:id", to: "posts#destroy"
 
-  get "/users", to: "users#index"         #gets all the users
-  get "/users/:id", to: "users#show"      #gets a single user
-  # get "/me", to: "users#show"           #gets current user
-
+  # get "/users", to: "users#index"         #gets all the users
+  get "/me", to: "users#show"          #gets current user
+  post "/signup", to: "users#create" 
   
-  # post "/login", to: "sessions#create"
-  # delete "/logout", to: "sessions#destroy"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
   get "/inquiries", to: "inquiries#index"               #shows all inquiries(job_applications)
   post "/inquiries", to: "inquiries#create"             #create inquiry(job_application)

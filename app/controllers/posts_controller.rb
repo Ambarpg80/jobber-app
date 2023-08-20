@@ -1,6 +1,15 @@
 class PostsController < ApplicationController
-    wrap_parameters format: []
-   
+    
+    # before_action :authorize
+    # params = {company_name: params[:company_name],
+    # industry: params[:industry], 
+    # title: params[:title], 
+    # salary: params[:salary], 
+    # experience_level: params[:experience_level], 
+    # location: params[:location],
+    # job_type: params[:job_type], 
+    # benefits: params[:benefits],
+    # description: params[:description]}
     def index 
         jobs = Post.all
         render json: jobs, status: :ok
@@ -8,17 +17,17 @@ class PostsController < ApplicationController
 
     def show
         job = Post.find(params[:id])
-        render json: job,include: [:users, :inquiries], status: :ok
+        render json: job, status: :ok
     end
 
-    def create 
-        job_post = Post.create(post_params)
-        render json: post_params, status: :created
+    def create  
+        job_post = Post.create(job_params)
+        render json: job_post, status: :created
     end
 
     def update
         job = Post.find(params[:id])
-        job.update(post_params)
+        job.update(job_params)
         render json: job, status: :accepted
     end
 
@@ -28,5 +37,16 @@ class PostsController < ApplicationController
         head :no_content
     end
 
+    private
 
+    def job_params
+       params.permit(:company_name, :industry, :title, :salary, :experience_level, :location, :job_type, :benefits, :description)
+    end
+
+    def 
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    end
 end
+   

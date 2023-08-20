@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Outlet} from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 import NavBar from "./NavBar"
 
 
@@ -10,7 +10,7 @@ function Home(){
   <div>
     
     <NavBar/>
-    <h1 >Homepage </h1>
+    
     <Outlet />
        
    

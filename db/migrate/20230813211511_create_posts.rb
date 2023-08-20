@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.string :company_name
       t.string :industry
       t.string :title
-      t.integer :salary
+      t.string :salary
       t.string :experience_level
       t.string :location
       t.string :job_type

@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_211533) do
     t.string "company_name"
     t.string "industry"
     t.string "title"
-    t.integer "salary"
+    t.string "salary"
     t.string "experience_level"
     t.string "location"
     t.string "job_type"

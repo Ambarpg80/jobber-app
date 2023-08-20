@@ -13,6 +13,13 @@ function NavBar(){
                     alignItems: 'center',
                     borderRadius: '5px',
                     textDecoration: 'none'};
+  const signup = {
+                      position: 'absolute', 
+                      right: 80, 
+                      fontSize: "20px",
+                      alignItems: 'center',
+                      borderRadius: '5px',
+                      textDecoration: 'none'};
 
   const logo = {color: 'navy', fontSize: "30px", fontWeight: "bold", textDecoration: 'none'}
 
@@ -29,6 +36,7 @@ function NavBar(){
           <NavLink style={findNPost} to="/posts">Find A Job</NavLink>
           <NavLink style={findNPost} to="/posts/new">Post A Job</NavLink>
           <NavLink  style={login}  to="/me" > Login </NavLink> 
+          <NavLink  style={signup} to="/signup" > Sign Up </NavLink> 
           </div>
         </nav>
         

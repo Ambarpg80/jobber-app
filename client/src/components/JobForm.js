@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import NavBar from './NavBar';
+
 
 
 function JobForm({onSubmission}){
+//    const [error, setError] = useState("")
    const [jobPostData, setJobPostData] = useState({
     company_name: "", 
     industry: "" ,
@@ -13,7 +14,7 @@ function JobForm({onSubmission}){
     job_type: "" ,
     benefits: "",
     description: ""
-   })
+   });
 
    function handleChange(e){
     setJobPostData({...jobPostData , 
@@ -22,22 +23,34 @@ function JobForm({onSubmission}){
 
    function handleSubmit(e){
     e.preventDefault()
-    fetch("/posts/new",{
+    //  const newJobItem=;
+    fetch("/posts",{
         method: "POST",
-        header: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-                                company_name: jobPostData.company_name , 
-                                industry: jobPostData.industry,
-                                title: jobPostData.title ,
-                                salary: jobPostData.salary ,
-                                experience_level: jobPostData.experience_level,
-                                location: jobPostData.location,
-                                job_type: jobPostData.job_type,
-                                benefits: jobPostData.benefits,
-                                description: jobPostData.description})
+        header: {Accept: 'application/json',
+                 "Content-Type": "application/json"},
+        body: JSON.stringify({company_name: jobPostData.company_name , 
+                      industry: jobPostData.industry,
+                      title: jobPostData.title ,
+                      salary: jobPostData.salary ,
+                      experience_level: jobPostData.experience_level,
+                      location: jobPostData.location,
+                      job_type: jobPostData.job_type,
+                      benefits: jobPostData.benefits,
+                      description: jobPostData.description})
     })
     .then(res => res.json())
-    .then(newPost => onSubmission(newPost))
+    .then(newPost => console.log(newPost) )
+        // {onSubmission(newPost)
+        //               setJobPostData({company_name: "", 
+        //                               industry: "" ,
+        //                               title: "" ,
+        //                               salary: "" ,
+        //                               experience_level: "" ,
+        //                               location: "" ,
+        //                               job_type: "" ,
+        //                               benefits: "",
+        //                               description: "",})
+        //         })
    }
   
  return(
