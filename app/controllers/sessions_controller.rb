@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
+   before_action :authorize    
+
 
     def create #login
-        user = User.find_by(id: session[:user_id])
-        if user&.authorize(params[:username])
+        user = User.find_by(username: params[:username])
+        if user&.authorize(params[:password])
           session[:user_id] = user.id
         render json: user, status: :ok
     else 

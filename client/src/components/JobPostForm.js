@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 
 
-function JobForm({onSubmission}){
+function JobPostForm({onSubmission}){
 //    const [error, setError] = useState("")
    const [jobPostData, setJobPostData] = useState({
     company_name: "", 
@@ -23,7 +23,6 @@ function JobForm({onSubmission}){
 
    function handleSubmit(e){
     e.preventDefault()
-    //  const newJobItem=;
     fetch("/posts",{
         method: "POST",
         header: {Accept: 'application/json',
@@ -39,18 +38,17 @@ function JobForm({onSubmission}){
                       description: jobPostData.description})
     })
     .then(res => res.json())
-    .then(newPost => console.log(newPost) )
-        // {onSubmission(newPost)
-        //               setJobPostData({company_name: "", 
-        //                               industry: "" ,
-        //                               title: "" ,
-        //                               salary: "" ,
-        //                               experience_level: "" ,
-        //                               location: "" ,
-        //                               job_type: "" ,
-        //                               benefits: "",
-        //                               description: "",})
-        //         })
+    .then(newPost => {onSubmission(newPost)
+                      setJobPostData({company_name: "", 
+                                      industry: "" ,
+                                      title: "" ,
+                                      salary: "" ,
+                                      experience_level: "" ,
+                                      location: "" ,
+                                      job_type: "" ,
+                                      benefits: "",
+                                      description: "",})
+          })
    }
   
  return(
@@ -118,4 +116,4 @@ function JobForm({onSubmission}){
     )
 }
 
-export default JobForm;
+export default JobPostForm;

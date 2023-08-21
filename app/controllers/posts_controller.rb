@@ -1,15 +1,7 @@
 class PostsController < ApplicationController
-    
-    # before_action :authorize
-    # params = {company_name: params[:company_name],
-    # industry: params[:industry], 
-    # title: params[:title], 
-    # salary: params[:salary], 
-    # experience_level: params[:experience_level], 
-    # location: params[:location],
-    # job_type: params[:job_type], 
-    # benefits: params[:benefits],
-    # description: params[:description]}
+     before_action :authorize 
+
+   
     def index 
         jobs = Post.all
         render json: jobs, status: :ok
@@ -49,4 +41,14 @@ class PostsController < ApplicationController
         return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end
-   
+
+
+    # params = {company_name: params[:company_name],
+    # industry: params[:industry], 
+    # title: params[:title], 
+    # salary: params[:salary], 
+    # experience_level: params[:experience_level], 
+    # location: params[:location],
+    # job_type: params[:job_type], 
+    # benefits: params[:benefits],
+    # description: params[:description]}

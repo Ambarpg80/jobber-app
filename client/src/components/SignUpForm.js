@@ -27,9 +27,11 @@ function SignUpForm({onSignUp}){
         .then(res => res.json())
         .then(newUser => onSignUp(newUser))
     }
+    
     return(
     <div className='form-container'>
-        <h1>Welcome to Jobber</h1>
+        <h1 >Welcome to Jobber</h1>
+        <p>Sign Up</p>
         <form onSubmit={handleSignup}>
             <label > Name:
                 <input onChange={inputChange} type="text" id="name" value={newUser.name}></input>

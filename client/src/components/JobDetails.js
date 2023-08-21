@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
+import JobApplicationForm from './JobApplicationForm';
+
 
 function JobDetails({job}){
-  const [selection, setSelection] = useState("")
 
-  
+    function getApplication(e){
+      return <JobApplicationForm job={job}/>
+    }
+
     return( 
     <div >  
        
@@ -18,9 +22,16 @@ function JobDetails({job}){
             <div className="grid-item">{job.location}</div>
             <div className="grid-item">{job.job_type}</div>
             <div className="grid-item">{job.benefits}</div>
-          </div> 
-          <p>{job.description}</p>
+          </div>
+          <details>
+            <summary>{job.summary}</summary>
+            <p>{job.description}</p>
+            <form action={`/posts/${job.id}/inquiries`} onClick={getApplication}> 
+              <button type='submit'> Apply </button>
+            </form>
+          </details> 
         </div>
+
     </div>     
     )
 }

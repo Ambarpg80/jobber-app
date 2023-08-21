@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :username, :password_digest
   
-  
+  has_many :inquiries
   has_many :posts, through: :inquiries
 end

@@ -5,17 +5,36 @@ import JobList from "./JobList"
 import Home from "./Home"
 import LoginForm from "./LoginForm"
 import SignUpForm from './SignUpForm';
-import JobForm from './JobForm';
+import JobPostForm from './JobPostForm';
+import JobApplicationForm from './JobApplicationForm'
+import User from './User'
 
 function App() {
-  const [allJobs, setAllJobs] = useState([])
+  const [allJobs, setAllJobs] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null)
    
 
+  // useEffect(() => {
+  //   fetch("/posts")
+  //     .then(res => res.json())
+  //     .then(jobPosts => setAllJobs(jobPosts));
+  // }, []);
+
   useEffect(() => {
-    fetch("/posts")
-      .then(res => res.json())
-      .then(jobPosts => setAllJobs(jobPosts));
+    fetch("/me")
+      .then(res => {
+        if (res.ok){
+          res.json().then(user => setCurrentUser(user));
+        }
+      })
   }, []);
+
+  if(currentUser){
+    return (<User currentUser={currentUser}/>)
+  }
+  if (!currentUser)  {
+  return (<LoginForm setCurrentUser={setCurrentUser}/>)
+  } 
 
 
   function handleNewPost(newPost){
@@ -23,20 +42,24 @@ function App() {
     setAllJobs([...allJobs, newPost])
   }
 
- function handleNewUser(newUser){
-   console.log(newUser)
- } 
+  function handleNewUser(newUser){
+   setCurrentUser(newUser)
+  } 
 
 
-
+  //  exact path="/" element={<Home  />}
   return (
      <BrowserRouter>
       {/* <nav className="App-header "><NavBar/></nav> */}
         <Routes>
-          <Route exact path="/" element={<Home  />} > 
-            <Route exact path="posts" element={<JobList alljobs={allJobs}  />} />
-            <Route path="posts/new" element={<JobForm onSubmission={handleNewPost} />} />
+          <Route path="/" element={<Home   />} > 
+            <Route exact path="posts" element={<JobList alljobs={allJobs} setAllJobs={setAllJobs} />} />
+            <Route path="posts/new" element={<JobPostForm onSubmission={handleNewPost} />} />
             <Route path="signup" element={<SignUpForm onSignUp={handleNewUser} />} />
+            <Route path="me" element={<User  setCurrentUser={setCurrentUser}/>} />
+            <Route path="login" element={<LoginForm  setCurrentUser={setCurrentUser}/>} />
+            
+            <Route path="posts/:id/inquiries" element={ <JobApplicationForm currentUser={currentUser} />} />
             {/*<Route exact path="*" element={<Error />} /> */}
           </Route>
         </Routes>

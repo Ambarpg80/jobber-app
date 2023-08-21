@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   patch "/posts/:id", to: "posts#update"
   delete "/posts/:id", to: "posts#destroy"
 
-  # get "/users", to: "users#index"         #gets all the users
+  get "/users", to: "users#index"         #gets all the users
   get "/me", to: "users#show"          #gets current user
   post "/signup", to: "users#create" 
   
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get "/inquiries", to: "inquiries#index"               #shows all inquiries(job_applications)
-  post "/inquiries", to: "inquiries#create"             #create inquiry(job_application)
+  post "post/:id/inquiries", to: "inquiries#create"             #create inquiry(job_application)
   get "/users/:id/inquiries", to: "inquiries#show"      #show one inquiry
   post "/users/:id/inquiries", to: "inquiries#create"   #create an inquiry
 

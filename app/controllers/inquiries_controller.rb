@@ -11,9 +11,13 @@ class InquiriesController < ApplicationController
     end
 
      def create
-        user = User.find(params[:id])
+        post = User.find(session[:user_id])
         inquiry = user.inquiries.create(inquiry_params)
-        render json: inquiry, status: :created
+        if inquiry.valid?
+        render json: inquiry, include: :user, status: :created
+        else
+            render json: {errors: inquiries.errors.full_messages}, status: :unprocessable_entity
+        end
      end
 
      private
