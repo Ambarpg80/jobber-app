@@ -1,12 +1,9 @@
 import React from 'react';
-import JobApplicationForm from './JobApplicationForm';
+
 
 
 function JobDetails({job}){
 
-    function getApplication(e){
-      return <JobApplicationForm job={job}/>
-    }
 
     return( 
     <div >  
@@ -26,9 +23,9 @@ function JobDetails({job}){
           <details>
             <summary>{job.summary}</summary>
             <p>{job.description}</p>
-            <form action={`/posts/${job.id}/inquiries`} onClick={getApplication}> 
-              <button type='submit'> Apply </button>
-            </form>
+            <a  href={`/posts/${job.id}/inquiries`} > 
+              <button type='button'> Apply </button>
+            </a>
           </details> 
         </div>
 

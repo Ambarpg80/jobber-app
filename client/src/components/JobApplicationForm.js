@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { UserContext } from "./context/UserProvider";
 
-function ApplicationForm({job, currentUser}){
-    //    const [error, setError] = useState("")
+function ApplicationForm({job, onApply}){
+    //  const [error, setError] = useState("")
+    const {currentUser} = useContext(UserContext); 
        
     const [ApplicationData, setApplicationData] = useState({
-        post_id: job.id,
-        user_id: currentUser.id,
+        post_id: 0,
+        user_id: 0,
         name: "", 
         address: "" ,
         email: "" ,
@@ -29,6 +31,8 @@ function ApplicationForm({job, currentUser}){
             header: {Accept: 'application/json',
                      "Content-Type": "application/json"},
             body: JSON.stringify({ 
+                                post_id: job.id,
+                                user_id: currentUser.id,
                                 name: ApplicationData.name, 
                                 address: ApplicationData.address ,
                                 email: ApplicationData.email ,
@@ -40,8 +44,10 @@ function ApplicationForm({job, currentUser}){
         })
         .then(res => res.json())
         .then(newApplication => console.log(newApplication) )
-            // {onSubmission(newPost)
-            //               setApplicationData({name: "", 
+            // {onApply(newPost)
+            //               setApplicationData({ post_id: 0,
+                                            // user_id: 0,
+                                            // name: "", 
                                             // address: "" ,
                                             // title: "" ,
                                             // email: "" ,

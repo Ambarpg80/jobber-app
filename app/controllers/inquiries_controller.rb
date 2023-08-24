@@ -1,5 +1,6 @@
 class InquiriesController < ApplicationController
-
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     def index 
         submissions = Inquiry.all
         render json: submissions, status: :ok
@@ -11,12 +12,10 @@ class InquiriesController < ApplicationController
     end
 
      def create
-        post = User.find(session[:user_id])
+        user = current_user
         inquiry = user.inquiries.create(inquiry_params)
         if inquiry.valid?
         render json: inquiry, include: :user, status: :created
-        else
-            render json: {errors: inquiries.errors.full_messages}, status: :unprocessable_entity
         end
      end
 

@@ -13,7 +13,7 @@ function JobPostForm({onSubmission}){
     location: "" ,
     job_type: "" ,
     benefits: "",
-    description: ""
+    description: "",
    });
 
    function handleChange(e){
@@ -35,7 +35,7 @@ function JobPostForm({onSubmission}){
                       location: jobPostData.location,
                       job_type: jobPostData.job_type,
                       benefits: jobPostData.benefits,
-                      description: jobPostData.description})
+                      description: jobPostData.description,})
     })
     .then(res => res.json())
     .then(newPost => {onSubmission(newPost)

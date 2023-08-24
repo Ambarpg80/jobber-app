@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-     before_action :authorize 
-
+    skip_before_action :authorized, only: [:index]
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
    
     def index 
         jobs = Post.all
@@ -13,7 +13,8 @@ class PostsController < ApplicationController
     end
 
     def create  
-        job_post = Post.create(job_params)
+        user = User.find(params[:id])
+        job_post = user.posts.create(job_params)
         render json: job_post, status: :created
     end
 
@@ -35,11 +36,7 @@ class PostsController < ApplicationController
        params.permit(:company_name, :industry, :title, :salary, :experience_level, :location, :job_type, :benefits, :description)
     end
 
-    def 
-
-    def authorize
-        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
-    end
+   
 end
 
 

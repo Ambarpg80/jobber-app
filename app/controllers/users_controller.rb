@@ -1,34 +1,38 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create]
+    skip_before_action :authorized, only: [:index, :create]
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
     
+
     def index 
         users = User.all
-        render json: users,include: [:posts, :inquiries], status: :ok
+        render json: users, include: [:posts, :inquiries], status: :ok
     end
 
-    def show
-        user = User.find(session[:user_id])
+    def show # /me Route
+        user = find_user
         if user
         render json: user, status: :ok
-        else render json: {error: "Not Authorized"}, status: :unauthorized
         end
     end
 
 
-    def create 
-        user = User.create(user_params)
+    def create  #signup Route
+        user = User.create!(user_params)
+        byebug
         if user.valid?
             session[:user_id]= user.id
           render json: user, status: :created
-        else
-            render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
     private
 
     def user_params
-        params.permit(:name, :username, :password, :confirm_password)
+        params.permit(:name, :username, :password, :password_confirmation)
+    end
+
+    def find_user
+        User.find_by(id: session[:user_id])
     end
 
 end

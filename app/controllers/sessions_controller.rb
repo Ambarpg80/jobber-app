@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
-   before_action :authorize    
+   skip_before_action :authorized, only: [:create]
+   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
-
-    def create #login
-        user = User.find_by(username: params[:username])
-        if user&.authorize(params[:password])
+    def create #login Route
+        user = User.find_by(username: params[:username]) 
+         byebug
+         if user&.authenticate(params[:password])
+           
           session[:user_id] = user.id
-        render json: user, status: :ok
-    else 
-        render json: {error: "Not Authorized"}, status: :not_authorized
+        
+            render json: user, status: :created
         end 
     end
     
@@ -17,5 +18,8 @@ class SessionsController < ApplicationController
         session.delete :user_id
         head :no_content
     end
+
+
+    private
     
 end
