@@ -1,13 +1,13 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Outlet} from 'react-router-dom'
 import NavBar from "./NavBar"
-import {UserContext} from './context/UserProvider'
-import LoginForm from './LoginForm'
+// import {UserContext} from './context/UserProvider'
+
 
 
 
 function Home(){
-     const {currentUser, isLoggedIn} = useContext(UserContext);
+    //  const {currentUser, isLoggedIn} = useContext(UserContext);
 
   //     if(!currentUser)  {
   //     	<h3> Please Login or Sign Up </h3>
@@ -16,14 +16,13 @@ function Home(){
  
  return(
   <div >
-    <nav className='App-header'> <NavBar/>
-    <h3 id="welcome">{ isLoggedIn ? `Welcome Back ${currentUser.name}!` : null}</h3>
-    </nav>
-    <Outlet />
-       
+    
+    <nav className='App-header'> <NavBar/></nav>
+    <Outlet/> 
+   
    
   </div>
   )
 }
- 
+// }
 export default Home
