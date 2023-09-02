@@ -1,10 +1,13 @@
 import React, {useState, useContext} from "react";
 import { UserContext } from "./context/UserProvider";
+import { useParams, useNavigate } from "react-router-dom";
 
-function ApplicationForm({job, onApply}){
-    //  const [error, setError] = useState("")
+
+function ApplicationForm({onApply}){
+    const jobId = useParams();
+    const navigate = useNavigate();
+    const [applicationError, setApplicationError] = useState("")
     const {currentUser} = useContext(UserContext); 
-       
     const [ApplicationData, setApplicationData] = useState({
         post_id: 0,
         user_id: 0,
@@ -17,21 +20,14 @@ function ApplicationForm({job, onApply}){
         about: "",
         
        });
-    
+      
+       
        function handleChange(e){
         setApplicationData({...ApplicationData , 
                         [e.target.id]: e.target.value,});
        }
-    
-       function applicationSubmission(e){
-        e.preventDefault()
-        //  const newJobItem=;
-        fetch(`/posts/${job.id}/inquiries`,{
-            method: "POST",
-            header: {Accept: 'application/json',
-                     "Content-Type": "application/json"},
-            body: JSON.stringify({ 
-                                post_id: job.id,
+        
+       const applicationInput ={ post_id: parseInt(Object.values(jobId)),
                                 user_id: currentUser.id,
                                 name: ApplicationData.name, 
                                 address: ApplicationData.address ,
@@ -40,24 +36,27 @@ function ApplicationForm({job, onApply}){
                                 skills: ApplicationData.skills,
                                 education: ApplicationData.education ,
                                 about: ApplicationData.about,
-                                }),
+                                }
+    
+       function applicationSubmission(e){
+        e.preventDefault()
+        fetch(`/inquiries`,{
+            method: "POST",
+             headers: {//Accept: 'application/json',
+                     "Content-Type": "application/json"},
+            body: JSON.stringify(applicationInput),
         })
-        .then(res => res.json())
-        .then(newApplication => console.log(newApplication) )
-            // {onApply(newPost)
-            //               setApplicationData({ post_id: 0,
-                                            // user_id: 0,
-                                            // name: "", 
-                                            // address: "" ,
-                                            // title: "" ,
-                                            // email: "" ,
-                                            // phone_number: "" ,
-                                            // skills: "" ,
-                                            // education: "" ,
-                                            // about: "",
-            //                               ,})
-            //         })
-       }
+        .then(res => {
+            if(res.ok){
+            res.json().then(newApplication => { onApply(newApplication) 
+                                                navigate("/me")
+            }) 
+            }else{
+            res.json().then(newAppError => setApplicationError( Object.entries(newAppError).map(err=> err) ) )
+                                }
+        })
+        }
+
       
      return(
         <div>
@@ -106,11 +105,13 @@ function ApplicationForm({job, onApply}){
                             onChange={handleChange}></input>
                 </label><br/>
             
-            <button> Submit Application </button>
+            <button type="submit"> Submit Application </button>
             </form>
+            {applicationError}
           </div>
         </div>
         )
-    }
+}
+
     
-    export default ApplicationForm;
+export default ApplicationForm

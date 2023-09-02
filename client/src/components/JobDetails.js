@@ -1,8 +1,18 @@
-import React from 'react';
-
-
+import React, {useContext} from 'react';
+import { UserContext } from './context/UserProvider';
+// import LoginForm from './LoginForm';
+import { useNavigate } from 'react-router-dom';
+import JobApplicationForm from './JobApplicationForm';
 
 function JobDetails({job}){
+  const {isLoggedIn, currentUser} = useContext(UserContext)
+  const navigate = useNavigate()
+
+  
+  function handleApplication(e){
+   navigate(`/posts/${job.id}/inquiries`) 
+    return <JobApplicationForm />
+  }
 
 
     return( 
@@ -22,10 +32,14 @@ function JobDetails({job}){
           </div>
           <details>
             <summary>{job.summary}</summary>
-            <p>{job.description}</p>
-            <a  href={`/posts/${job.id}/inquiries`} > 
-              <button type='button'> Apply </button>
-            </a>
+            {isLoggedIn && currentUser ? 
+                        <div> 
+                          <p>{job.description}</p>
+                           <button onClick={handleApplication} type='button'> Apply </button> 
+                        </div>
+                        :
+                        <p>Please Login or Sign Up</p>
+            }
           </details> 
         </div>
 
