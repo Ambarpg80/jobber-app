@@ -1,10 +1,14 @@
-import React, {useState} from 'react'
-
+import React, {useState , useContext } from 'react'
+import { useNavigate} from 'react-router-dom';
+import { UserContext } from './context/UserProvider';
+import LoginForm from './LoginForm';
 
 
 function JobPostForm({onSubmission}){
-//    const [error, setError] = useState("")
-   const [jobPostData, setJobPostData] = useState({
+  const {isLoggedIn, currentUser} = useContext(UserContext);
+  const navigate= useNavigate();
+  const [postError, setPostError] = useState("")
+  const [jobPostData, setJobPostData] = useState({
     company_name: "", 
     industry: "" ,
     title: "" ,
@@ -14,47 +18,50 @@ function JobPostForm({onSubmission}){
     job_type: "" ,
     benefits: "",
     description: "",
-   });
+  });
 
-   function handleChange(e){
+  function handleChange(e){
     setJobPostData({...jobPostData , 
                     [e.target.id]: e.target.value,});
-   }
+  }
 
-   function handleSubmit(e){
+  const applicationData= {company_name: jobPostData.company_name , 
+                          industry: jobPostData.industry,
+                          title: jobPostData.title ,
+                          salary: jobPostData.salary ,
+                          experience_level: jobPostData.experience_level,
+                          location: jobPostData.location,
+                          job_type: jobPostData.job_type,
+                          benefits: jobPostData.benefits,
+                          description: jobPostData.description,
+  }
+
+  function handleJobSubmit(e){
     e.preventDefault()
     fetch("/posts",{
         method: "POST",
-        header: {Accept: 'application/json',
-                 "Content-Type": "application/json"},
-        body: JSON.stringify({company_name: jobPostData.company_name , 
-                      industry: jobPostData.industry,
-                      title: jobPostData.title ,
-                      salary: jobPostData.salary ,
-                      experience_level: jobPostData.experience_level,
-                      location: jobPostData.location,
-                      job_type: jobPostData.job_type,
-                      benefits: jobPostData.benefits,
-                      description: jobPostData.description,})
+        headers: {"Content-Type": "application/json",},
+        body: JSON.stringify(applicationData),
     })
-    .then(res => res.json())
-    .then(newPost => {onSubmission(newPost)
-                      setJobPostData({company_name: "", 
-                                      industry: "" ,
-                                      title: "" ,
-                                      salary: "" ,
-                                      experience_level: "" ,
-                                      location: "" ,
-                                      job_type: "" ,
-                                      benefits: "",
-                                      description: "",})
+   .then(res => {
+        if(res.ok){ 
+    res.json().then(newPost => {onSubmission(newPost)
+                                navigate("/posts")
           })
-   }
-  
+        }else{ 
+          res.json().then(err => setPostError(err.error))
+        }
+   })
+  }
+
+
+  if (!isLoggedIn && !currentUser){
+    <LoginForm/>
+  }else{
  return(
     <div>
       <div className='form-container'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleJobSubmit}>
             <label>Company Name: 
                 <input type="text"
                         id="company_name"
@@ -111,9 +118,12 @@ function JobPostForm({onSubmission}){
             </label><br/>
         <button> Submit Job Post</button>
         </form>
+        <br/>
+        {postError}
       </div>
     </div>
     )
+  }
 }
 
 export default JobPostForm;
