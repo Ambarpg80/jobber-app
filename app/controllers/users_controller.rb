@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:index, :create]
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+    skip_before_action :authorized, only: :create
     
 
     def index 
@@ -9,16 +8,15 @@ class UsersController < ApplicationController
     end
 
     def show # /me Route
-        user = find_user
+        user = current_user
         if user
-        render json: user, status: :ok
+        render json: user, include: [:posts, :inquiries], status: :ok
         end
     end
 
 
     def create  #signup Route
         user = User.create!(user_params)
-        byebug
         if user.valid?
             session[:user_id]= user.id
           render json: user, status: :created
@@ -31,8 +29,5 @@ class UsersController < ApplicationController
         params.permit(:name, :username, :password, :password_confirmation)
     end
 
-    def find_user
-        User.find_by(id: session[:user_id])
-    end
 
 end

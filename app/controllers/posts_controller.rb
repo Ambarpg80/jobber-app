@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-    skip_before_action :authorized, only: [:index]
-    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    skip_before_action :authorized, only: :index
+    
    
     def index 
         jobs = Post.all
@@ -13,9 +13,11 @@ class PostsController < ApplicationController
     end
 
     def create  
-        user = User.find(params[:id])
-        job_post = user.posts.create(job_params)
-        render json: job_post, status: :created
+        user = current_user
+        job_post = Post.create(job_params)
+        if user && job_post.valid?
+           render json: job_post, status: :created
+          end
     end
 
     def update
