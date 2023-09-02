@@ -1,37 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz@10..48&family=Cormorant+Garamond:ital,wght@1,300&family=Train+One&display=swap');
+
+/* font-family: 'Bricolage Grotesque', sans-serif;
+font-family: 'Cormorant Garamond', serif;
+font-family: 'Train One', cursive; */
+
 body {
   background-color: #fde7d8;
+ 
 }
+#welcome{
+  font-family: 'Train One', cursive; 
+  color:rgb(0, 0, 123); 
+  font-size: 60px;
+  align-items: center;
+  margin-left: 30%;  
+}
+.rightImage {float: right; 
+  height: 700px;
+  width: 50%; 
+  background-color: ivory; 
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; 
+  
+}
+
+.leftImage {
+  float: left; 
+  height: 700px;
+  width: 50%; 
+  background-color: rgb(252, 218, 183) ;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  
+  }
 
 .App-header {
   background-color: #f7aa87;
+  font-size: 25px;
   min-height: 5vh;
-  display: flex; 
+  font-family: 'Bricolage Grotesque', sans-serif;
   align-items: center;
   padding-left: 3vh;
-  font-size: 20px;
-  color:#18025B;
+  color:navy;
 }
  
-#welcome{
-  position: 'absolute'; 
-  right: 50; 
-  font-size: 20px;
-  align-items: center;
-  float: right;
-}
+
 
 ul {
   list-style-type: none;
 }
 
-button {
+nav button {
   position: 'absolute'; 
   right: 20; 
   font-size: "20px"; 
-  align-items: center;
+  /* align-items: center; */
 }
 nav a.active{
   color: rgb(227, 223, 199)
+}
+
+.auth-container{    /*job card container */
+  font-size : 20px;
+  color:#201c19;  
+  margin: auto;
+  padding: auto;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  width : 600px
+ 
 }
 
 div.form-container{    /*job card container */
