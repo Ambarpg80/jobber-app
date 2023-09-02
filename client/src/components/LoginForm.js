@@ -1,8 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {UserContext} from './context/UserProvider'
 import SignUpForm from './SignUpForm';
- 
-
 
 function LoginForm(){
     const [loginError, setLoginError] = useState([])
@@ -10,24 +8,25 @@ function LoginForm(){
      const [password, setPassword]= useState("");
      const [showSignup, setShowSignup] = useState(false)
      const {login} = useContext(UserContext);
+    
 
     function handleLogin(e){
         e.preventDefault()
+        const loginParams = {username, password}           
         fetch("/login",{
             method: "POST",
-            header: {"Content-Type": "application/json"},
-            body: JSON.stringify({username: username, 
-                                  password: password, })
-
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(loginParams)
         })
         .then(res => {
             if (res.ok){ 
-            res.json().then( user => console.log(user) )}
-            // else{
-            // res.json().then( err => setLoginError( err.error.map(err=> <li>{err}</li>) ))
-            // }
+            res.json().then( user =>  login(user) )           
+           } else {
+            res.json().then( err => setLoginError( err.error.map(err=> <li>{err}</li>) ) )
+             
+           }
         })
-    }
+    }   
 
     function displaySignup(){
         setShowSignup(!showSignup)
@@ -35,7 +34,7 @@ function LoginForm(){
 
     return(
     <>
-    <div className='form-container'>
+    <div className='auth-container'>
         <h1 >Welcome to Jobber</h1>
         {showSignup ? <SignUpForm /> :
         <form onSubmit={handleLogin}>
@@ -56,11 +55,12 @@ function LoginForm(){
             <button type="submit">Login</button>
         </form> }
         <div onClick={displaySignup} >
-            <button type="button">{showSignup ? "Login " : " Sign Up"}</button> 
+            <button type="button">{showSignup ? "Go to Login " : "Go to Sign Up"}</button> 
         </div>
         <ul>{loginError}</ul>
     </div>
     </>
     )
 }
+
 export default LoginForm

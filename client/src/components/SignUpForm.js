@@ -23,7 +23,7 @@ function SignUpForm(){
         e.preventDefault()
         fetch("http://localhost:3000/signup",{
             method: "POST",
-            header: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({name: newUser.name,
                                   username: newUser.username,
                                   password: newUser.password,
@@ -55,7 +55,7 @@ function SignUpForm(){
             <label >Confirm Password:
                 <input onChange={inputChange}type="password" id="password_confirmation" value={newUser.password_confirmation}></input>
             </label> <br/>
-            <button>Submit</button>
+            <button>Sign Up</button>
         </form>
         <ul>
             {signUpError}
