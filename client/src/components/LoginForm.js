@@ -4,10 +4,10 @@ import SignUpForm from './SignUpForm';
 
 function LoginForm(){
     const [loginError, setLoginError] = useState([])
-     const [username, setUsername] = useState("");
-     const [password, setPassword]= useState("");
-     const [showSignup, setShowSignup] = useState(false)
-     const {login} = useContext(UserContext);
+    const [username, setUsername] = useState("");
+    const [password, setPassword]= useState("");
+    const [showSignup, setShowSignup] = useState(false)
+    const {login} = useContext(UserContext);
     
 
     function handleLogin(e){
@@ -19,11 +19,10 @@ function LoginForm(){
             body: JSON.stringify(loginParams)
         })
         .then(res => {
-            if (res.ok){ 
+            if (res.ok){
             res.json().then( user =>  login(user) )           
            } else {
-            res.json().then( err => setLoginError( err.error.map(err=> <li>{err}</li>) ) )
-             
+           res.json().then( err => setLoginError(err.error) )
            }
         })
     }   
@@ -32,7 +31,8 @@ function LoginForm(){
         setShowSignup(!showSignup)
     }
 
-    return(
+
+    return (
     <>
     <div className='auth-container'>
         <h1 >Welcome to Jobber</h1>
