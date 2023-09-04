@@ -1,18 +1,36 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import { UserContext } from './context/UserProvider';
-// import LoginForm from './LoginForm';
 import { useNavigate } from 'react-router-dom';
 import JobApplicationForm from './JobApplicationForm';
+import PostEditForm from './PostEditForm';
 
-function JobDetails({job}){
+function JobDetails({job, onPostDelete}){
+  const [showEdit, setShowEdit] = useState(false)
   const {isLoggedIn, currentUser} = useContext(UserContext)
   const navigate = useNavigate()
 
   
-  function handleApplication(e){
+  function handleApplication(){
    navigate(`/posts/${job.id}/inquiries`) 
     return <JobApplicationForm />
+  } 
+
+  function showEditForm(){
+    setShowEdit(!showEdit)
   }
+  
+  
+
+  function deletePost(e){
+    e.preventDefault()
+    fetch(`/posts/${job.id}`,{
+    method: "DELETE",})
+    .then(res => res.json)
+    .then(()=> onPostDelete(job))
+  }
+
+
+
 
 
     return( 
@@ -41,8 +59,11 @@ function JobDetails({job}){
                         <p>Please Login or Sign Up</p>
             }
           </details> 
+           <button onClick={showEditForm} type='button'> Edit </button>
+           <button onClick={deletePost} type='button'> Delete Post </button>
+           <div>{showEdit ? <PostEditForm job={job} /> : null} </div>
         </div>
-
+       
     </div>     
     )
 }

@@ -25,7 +25,7 @@ function JobPostForm({onSubmission}){
                     [e.target.id]: e.target.value,});
   }
 
-  const applicationData= {company_name: jobPostData.company_name , 
+  const postData= {company_name: jobPostData.company_name , 
                           industry: jobPostData.industry,
                           title: jobPostData.title ,
                           salary: jobPostData.salary ,
@@ -41,7 +41,7 @@ function JobPostForm({onSubmission}){
     fetch("/posts",{
         method: "POST",
         headers: {"Content-Type": "application/json",},
-        body: JSON.stringify(applicationData),
+        body: JSON.stringify(postData),
     })
    .then(res => {
         if(res.ok){ 
