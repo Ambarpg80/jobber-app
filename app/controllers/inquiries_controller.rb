@@ -4,13 +4,9 @@ class InquiriesController < ApplicationController
     
     def index 
         submissions = Inquiry.all
-        render json: submissions, status: :ok
+        render json: submissions, include: :post, status: :ok
     end
 
-    def show 
-        user = current_user
-        render json: user.inquiries, include: :post, status: :ok
-    end
 
      def create
         user = current_user
@@ -22,7 +18,7 @@ class InquiriesController < ApplicationController
 
      def destroy
         user = current_user
-        inquiry =  Inquiry.find_by(id: params[:id])
+        inquiry = user.inquiries.find_by(id: params[:id])
         inquiry.destroy
         head :no_content
      end
