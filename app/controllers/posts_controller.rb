@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        job = Post.find(params[:id])
+        job = Post.find_by(id: params[:id])
         job.delete
         head :no_content
     end
