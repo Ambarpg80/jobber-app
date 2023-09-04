@@ -19,8 +19,7 @@ Rails.application.routes.draw do
   get "/posts/login", to: "inquiries#login_to_apply"
   get "/inquiries", to: "inquiries#index"               #shows all inquiries(job_applications)
   post "/inquiries", to: "inquiries#create"             #create inquiry(job_application)
-  # get "/me/inquiries", to: "inquiries#show" #show one inquiry
-  delete "/me/inquiries/:id", to: "inquiries#destroy"      
+  delete "/me/inquiries/:id", to: "inquiries#destroy"     #delete inquiry belonging to user(withdraws application) 
   
 
 end
