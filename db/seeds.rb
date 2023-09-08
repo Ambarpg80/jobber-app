@@ -40,6 +40,18 @@ fs = Post.create(company_name: "Full-Stop Insurance",
                  benefits: "Medical/ Dental, 401K, Unlimited PTO ", 
                  description: "Our claims department is currently seeking a Liability Claims Examiner to handle commercial liability insurance claims. The ideal candidate for this position will have a background in commercial liability insurance and will be comfortable working independently while maintaining regular contact with other team members. Knowledge and experience with construction defect claims is preferred. Description: Investigates and manages commercial general liability claims; specifically, complex construction defect claims; Interprets policy coverage and determines if and how coverage applies to submitted claims; Sets reserves and authorizes payment within scope of authority, effectively resolving claims in a cost-effective manner and ensuring timely issuance of disbursements; Coordinates and manages fact investigations and evaluates claims and lawsuits through contact with insureds, claimants, witnesses and vendors; Utilizes negotiating skills to resolve claims; Works with attorneys, account representatives, agents and insureds regarding the handling and/or disposition of claims; Analyzes claim activity and provides data for management reports; and, Keeps current on state/territory regulations as well as industry activity and trends.")
 
+40.times do 
+    Post.create(company_name: Faker::Company.name,
+        industry: Faker::Company.industry,
+        title: Faker::Job.title, 
+        salary: "$#{Faker::Number::between(from:35,to:200)}K",
+        experience_level: ["Mid Level", "Entry-Level", "Senior-Level"].sample, 
+        location: Faker::Address::city,
+        job_type: ["Full-time", "Part-time"].sample, 
+        benefits: "Medical/ Dental, 401K, Unlimited PTO", 
+        description: Faker::Lorem::paragraph(sentence_count: 10)
+    )
+end
 
 kim = User.create(name: "Kimberly Tussaud" ,
                   email: "some1@example.com", 
