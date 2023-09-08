@@ -4,33 +4,8 @@ class PostsController < ApplicationController
    
     def index 
         jobs = Post.all
-        render json: jobs, status: :ok
-    end
-
-    def show
-        job = Post.find(params[:id])
-        render json: job, status: :ok
-    end
-
-    def create  
-        user = current_user
-        job_post = Post.create(job_params)
-        if user && job_post.valid?
-           render json: job_post, status: :created
-          end
-    end
-
-    def update
-        job = Post.find(params[:id])
-        job.update(job_params)
-        render json: job, status: :accepted
-    end
-
-    def destroy
-        job = Post.find_by(id: params[:id])
-        job.delete
-        head :no_content
-    end
+        render json: jobs,  status: :ok
+    end 
 
     private
 
@@ -42,12 +17,3 @@ class PostsController < ApplicationController
 end
 
 
-    # params = {company_name: params[:company_name],
-    # industry: params[:industry], 
-    # title: params[:title], 
-    # salary: params[:salary], 
-    # experience_level: params[:experience_level], 
-    # location: params[:location],
-    # job_type: params[:job_type], 
-    # benefits: params[:benefits],
-    # description: params[:description]}
