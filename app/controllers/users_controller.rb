@@ -24,7 +24,7 @@ class UsersController < ApplicationController
         user = current_user
         user.update(user_params)
         if user.valid?
-        render json: user, status: :accepted
+          render json: user, status: :accepted
         end
     end
     

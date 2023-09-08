@@ -17,10 +17,10 @@ function LoginEditForm(){
                         [e.target.id]: e.target.value,});
       }
 
-    const editData= {name: userUpdate.name , 
+    const editData= {name: userUpdate.name, 
                      email: userUpdate.email,
-                     password: userUpdate.password ,
-                     password_confirmation: userUpdate.password_confirmation ,
+                     password: userUpdate.password,
+                     password_confirmation: userUpdate.password_confirmation,
                     }
 
     function updatePost(){
@@ -31,9 +31,9 @@ function LoginEditForm(){
         })
           .then(res => {
             if(res.ok){
-              res.json().then(data=> setCurrentUser(data))
+              res.json().then(data => setCurrentUser(data))
             }else{
-              res.json().then(err=> setEditError(err.error))
+              res.json().then(error => setEditError(error.errors.map(err => <li key={err}>{err}</li>)))
             }
           })
         }
