@@ -1,17 +1,17 @@
 import React from 'react'
 
 
-function Inquiry({inquiry, onDelete, allJobs}){
-    
+function Inquiry({inquiry, job, onDelete }){
+
     function handleDelete(e){
       e.preventDefault()
-      fetch(`/me/inquiries/${inquiry.id}`,{
-      method: "DELETE",})
-      .then(res => res.json)
-      .then(()=> onDelete(inquiry))
+      fetch(`/inquiries/${inquiry.id}`,{
+      method: "DELETE", 
+      })
+      .then(onDelete(inquiry))
     }
-    const job = allJobs.find(job => job.id === inquiry.post_id ? job : null) //find job titles that match the inquiry
-               
+      
+
     return (
         <div className="container">
           <details>
@@ -32,5 +32,6 @@ function Inquiry({inquiry, onDelete, allJobs}){
           <button style={{width: "200px", marginLeft: "25%"}} onClick={handleDelete} type="button"> Withdraw Application </button> 
         </div>
     )
+   
 }
 export default Inquiry
