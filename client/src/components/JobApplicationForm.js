@@ -11,15 +11,14 @@ function ApplicationForm({onApply}){
     const [ApplicationData, setApplicationData] = useState({
         post_id: 0,
         user_id: 0,
-        name: "", 
+        name: currentUser.name, 
+        email: currentUser.email ,
         address: "" ,
-        email: "" ,
         phone_number: "" ,
         skills: "" ,
         education: "" ,
         about: "",
-        
-       });
+      });
       
        
        function handleChange(e){
@@ -42,8 +41,7 @@ function ApplicationForm({onApply}){
         e.preventDefault()
         fetch(`/inquiries`,{
             method: "POST",
-             headers: {//Accept: 'application/json',
-                     "Content-Type": "application/json"},
+             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(applicationInput),
         })
         .then(res => {
@@ -68,18 +66,19 @@ function ApplicationForm({onApply}){
                             value={ApplicationData.name}
                             onChange={handleChange}></input>
                 </label><br/>
+                <label> Email:
+                    <input type="text"
+                            id="email"
+                            value={ApplicationData.email}
+                            onChange={handleChange}></input>
+                </label><br/> 
                 <label> Address:
                     <input type="text"
                             id="address"
                             value={ApplicationData.address}
                             onChange={handleChange}></input>
                 </label><br/>
-                <label> Email:
-                    <input type="text"
-                            id="email"
-                            value={ApplicationData.email}
-                            onChange={handleChange}></input>
-                </label><br/>
+               
                 <label> Phone Number:
                     <input type="text"
                             id="phone_number"

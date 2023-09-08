@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 
-
-
 const UserContext = React.createContext("");
 
 function UserProvider({children}){
@@ -33,8 +31,9 @@ function UserProvider({children}){
       function signup(user){
         setCurrentUser(user)
         setIsLoggedIn(true)
+        navigate("/welcome")
       }
-
+      
 	return(
 	<UserContext.Provider value={{currentUser, setCurrentUser, isLoggedIn, login, logout, signup}}>
 		{children}
