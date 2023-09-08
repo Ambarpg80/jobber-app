@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         render json: user, status: :accepted
         end
     end
-
+    
     private
 
     def user_params
