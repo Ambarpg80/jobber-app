@@ -98,10 +98,11 @@ function ApplicationForm({onApply}){
                             onChange={handleChange}></input>
                 </label><br/>
                 <label> About: 
-                    <input type="text"
+                     <textarea type="text"
                             id="about"
                             value={ApplicationData.about}
-                            onChange={handleChange}></input>
+                            onChange={handleChange}>
+                  </textarea>
                 </label><br/>
             
             <button type="submit"> Submit Application </button>

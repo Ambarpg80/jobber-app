@@ -42,7 +42,7 @@ function NavBar(){
  return(
         <nav onClick={handleNav} className="App-header active" >
          
-          <NavLink style={logo}to="/welcome">JobLancer</NavLink>
+          <NavLink style={logo}to="/">JobLancer</NavLink>
           {isLoggedIn ? <NavLink style={findNPost} to="/me">Dashboard</NavLink> : <NavLink style={findNPost} to="/posts">Find A Job</NavLink>}
          
          {isLoggedIn ? <Link style={loginLink} onClick={logoutUser}> Logout </Link> :  <Link style={loginLink} to="/login"> Login </Link>  }

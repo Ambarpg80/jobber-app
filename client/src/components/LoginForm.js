@@ -35,7 +35,7 @@ function LoginForm(){
     return (
     <>
     <div className='auth-container'>
-        <h1 >Welcome to Jobber</h1>
+        <h1 >Welcome to JobLancer</h1>
         {showSignup ? <SignUpForm /> :
         <form onSubmit={handleLogin}>
             <label >Email:

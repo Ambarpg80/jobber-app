@@ -71,6 +71,15 @@ nav a.active{
  
 }
 
+ input{
+  text-align: left; 
+  border-radius: 5px;
+  font-size: 20px;
+  margin: 10px;
+  height: 25px;
+  width: 350px;
+}
+
 div.form-container{    /*job card container */
   font-size : 20px;
   color:#201c19;  
@@ -88,13 +97,24 @@ div.form-container{    /*job card container */
  
 }
 
-input {
+div.form-container input{
   text-align: left; 
   border-radius: 5px;
   font-size: 20px;
   margin: 10px;
   height: 25px;
-  width: 350px;
+  width: 650px;
+}
+
+textarea{
+  text-align: left; 
+  border-radius: 5px;
+  border:  solid 2px rgba(0, 0, 0, 0.683);
+  font-size: 20px;
+  margin: 10px;
+  height: 25px;
+  width: 650px;
+  max-width: 650px;
 }
 
 button{
