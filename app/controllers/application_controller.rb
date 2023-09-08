@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
 
     def render_unprocessable_entity
         user = current_user
-        render json: {errors: [user.errors.full_messages]}, status: :unprocessable_entity
+        render json: {errors: [user.error.full_messages]}, status: :unprocessable_entity
     end
 
    def render_not_found
