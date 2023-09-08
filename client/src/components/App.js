@@ -2,7 +2,7 @@ import '../App.css';
 import { Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import JobList from "./JobList"
-import Home from "./Home"
+import NavBar from "./NavBar"
 import LoginForm from "./LoginForm"
 import JobApplicationForm from './JobApplicationForm'
 import { UserProvider } from './context/UserProvider';
@@ -46,10 +46,10 @@ function App() {
     return (
       <div >
         <UserProvider>
+        <nav className='App-header'> <NavBar/></nav>
           <Routes>
-            <Route exact path="/" element={<Home   />} > 
 
-              <Route path="/welcome" element={<Welcome  />} />
+              <Route path="/" element={<Welcome  />} />
 
               <Route path="/me" 
                      element={ <UserPage allJobs={allJobs} 
@@ -82,8 +82,6 @@ function App() {
                      element={ <JobApplicationForm onApply={handleNewApplication} /> } 
               />
 
-              {/*<Route exact path="*" element={<Error />} /> */}
-            </Route>
           </Routes>
         </UserProvider>
         </div>

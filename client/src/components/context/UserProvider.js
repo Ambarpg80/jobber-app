@@ -26,12 +26,12 @@ function UserProvider({children}){
       function logout(){
         setCurrentUser({})
         setIsLoggedIn(false)
-        navigate("/welcome")
+        navigate("/")
       }
       function signup(user){
         setCurrentUser(user)
         setIsLoggedIn(true)
-        navigate("/welcome")
+        navigate("/")
       }
       
 	return(
