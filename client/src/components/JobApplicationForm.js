@@ -46,14 +46,15 @@ function ApplicationForm({onApply}){
         })
         .then(res => {
             if(res.ok){
-            res.json().then(newApplication => { onApply(newApplication) 
-                                                navigate("/me")
-            }) 
+            res.json()
+            .then(newApplication => { onApply(newApplication)
+                                                navigate("/me") })
             }else{
-            res.json().then(newAppError => setApplicationError( Object.entries(newAppError).map(err=> err) ) )
-                                }
-        })
+            res.json().then(error => setApplicationError( error.errors.map(err => <li key={err}>{err}</li>) ) )
+            }
+        })                        
         }
+        
 
       
      return(

@@ -5,6 +5,8 @@ class InquiriesController < ApplicationController
         inquiry = Inquiry.create(inquiry_params)
         if inquiry.valid?
         render json: inquiry, status: :created
+        else
+         render json: {errors: inquiry.errors.full_messages}, status: :unprocessable_entity
         end
      end
 
