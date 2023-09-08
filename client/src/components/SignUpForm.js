@@ -3,12 +3,13 @@ import {UserContext} from './context/UserProvider'
 
 
 
+
 function SignUpForm(){
     const {signup} = useContext(UserContext);
     const [signUpError, setsignUpError] = useState([])
     const [newUser, setNewUser] = useState({
             name: "",
-            username: "",
+            email: "",
             password: "",
             password_confirmation: ""
     })
@@ -21,20 +22,20 @@ function SignUpForm(){
 
     function handleSignup(e){
         e.preventDefault()
-        fetch("http://localhost:3000/signup",{
+        fetch("/signup",{
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({name: newUser.name,
-                                  username: newUser.username,
+                                  email: newUser.email,
                                   password: newUser.password,
                                   password_confirmation: newUser.password_confirmation,})
        })
         .then(res => {
             if(res.ok){
-                res.json().then( user =>  signup(user) ) }
-            // /}else{
-            //     res.json().then( err=>  console.log(err.error))
-            // }setsignUpError(user.errors.map(err=><li>{err}</li>))
+                res.json().then( user => signup(user)) 
+            }else{
+                res.json().then(err=>  setsignUpError(err.errors.map(error => <li key={error}>{error}</li>)))
+            }
             })
         }
 
@@ -46,8 +47,8 @@ function SignUpForm(){
             <label > Name:
                 <input onChange={inputChange} type="text" id="name" value={newUser.name}></input>
             </label> <br/>
-            <label >Username:
-                <input onChange={inputChange} type="text" id="username" value={newUser.username}></input>
+            <label >Email:
+                <input onChange={inputChange} type="text" id="email" value={newUser.email}></input>
             </label> <br/>
             <label >Password:
                 <input onChange={inputChange} type="password" id="password" value={newUser.password}></input>

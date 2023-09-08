@@ -4,7 +4,7 @@ import SignUpForm from './SignUpForm';
 
 function LoginForm(){
     const [loginError, setLoginError] = useState([])
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
     const [showSignup, setShowSignup] = useState(false)
     const {login} = useContext(UserContext);
@@ -12,7 +12,7 @@ function LoginForm(){
 
     function handleLogin(e){
         e.preventDefault()
-        const loginParams = {username, password}           
+        const loginParams = {email, password}           
         fetch("/login",{
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -38,11 +38,11 @@ function LoginForm(){
         <h1 >Welcome to Jobber</h1>
         {showSignup ? <SignUpForm /> :
         <form onSubmit={handleLogin}>
-            <label >Username:
+            <label >Email:
                 <input type="text" 
-                       id="username" 
-                       value={username}
-                       onChange={(e) => setUsername(e.target.value)}>
+                       id="email" 
+                       value={email}
+                       onChange={(e) => setEmail(e.target.value)}>
                 </input>
             </label> <br/>
             <label >Password:

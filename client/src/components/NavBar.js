@@ -20,6 +20,11 @@ function NavBar(){
                 fontFamily: 'Train One, cursive'}
 
   const findNPost = { paddingLeft: "3vh", textDecoration: 'none'}
+
+  const userLogo = {color:"navy",
+                    position: 'absolute',
+                    top: 10, 
+                    right: 120, }
  
   function handleNav(){
     SetIsActive(!isActive)
@@ -38,10 +43,10 @@ function NavBar(){
         <nav onClick={handleNav} className="App-header active" >
          
           <NavLink style={logo}to="/welcome">JobLancer</NavLink>
-          <NavLink style={findNPost} to="/posts">Find A Job</NavLink>
-          <NavLink style={findNPost} to="/posts/new">{isLoggedIn ? "Post A Job" : null}</NavLink>
+          {isLoggedIn ? <NavLink style={findNPost} to="/me">Dashboard</NavLink> : <NavLink style={findNPost} to="/posts">Find A Job</NavLink>}
+         
          {isLoggedIn ? <Link style={loginLink} onClick={logoutUser}> Logout </Link> :  <Link style={loginLink} to="/login"> Login </Link>  }
-      
+          <NavLink style={userLogo} to="/users/:id">{isLoggedIn ? <img width="40" height="40" src="https://img.icons8.com/pastel-glyph/64/user-male-circle.png" alt="user-male-circle"/> : null}</NavLink>
         </nav>
         
     )
@@ -50,3 +55,4 @@ function NavBar(){
 
 export default NavBar;
 
+// Login icons created by berkahicon - Flaticon
