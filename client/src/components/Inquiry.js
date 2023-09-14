@@ -20,7 +20,7 @@ function Inquiry({inquiry, job, onDelete }){
               <p> {job.company_name} </p>
             </summary>
               <div className='grid' >
-                <p>Name: {inquiry.name}</p>
+                <p>Name: {inquiry.name}</p><br/>
                 <p>Address: {inquiry.address}</p>
                 <p>Email: {inquiry.email}</p>
                 <p>Phone: {inquiry.phone}</p>

@@ -46,7 +46,7 @@ function NavBar(){
           {isLoggedIn ? <NavLink style={findNPost} to="/me">Dashboard</NavLink> : <NavLink style={findNPost} to="/posts">Find A Job</NavLink>}
          
          {isLoggedIn ? <Link style={loginLink} onClick={logoutUser}> Logout </Link> :  <Link style={loginLink} to="/login"> Login </Link>  }
-          <NavLink style={userLogo} to="/users/:id">{isLoggedIn ? <img width="40" height="40" src="https://img.icons8.com/pastel-glyph/64/user-male-circle.png" alt="user-male-circle"/> : null}</NavLink>
+          <NavLink style={userLogo} to="/edit_profile">{isLoggedIn ? <img width="40" height="40" src="https://img.icons8.com/pastel-glyph/64/user-male-circle.png" alt="user-male-circle"/> : null}</NavLink>
         </nav>
         
     )

@@ -41,7 +41,7 @@ function ApplicationForm({onApply}){
         e.preventDefault()
         fetch(`/inquiries`,{
             method: "POST",
-             headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(applicationInput),
         })
         .then(res => {

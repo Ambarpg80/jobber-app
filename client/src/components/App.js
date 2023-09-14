@@ -66,7 +66,7 @@ function App() {
                                          filteredList={filteredList} /> } 
               />
 
-              <Route path="/users/:id" 
+              <Route path="/edit_profile" 
                      element={ <LoginEditForm  /> } 
               />
               
