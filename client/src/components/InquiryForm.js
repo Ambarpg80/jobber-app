@@ -3,7 +3,7 @@ import { UserContext } from "./context/UserProvider";
 import { useParams, useNavigate } from "react-router-dom";
 
 
-function ApplicationForm({onApply}){
+function InquiryForm({onApply}){
     const jobId = useParams();
     const navigate = useNavigate();
     const [applicationError, setApplicationError] = useState("")
@@ -115,4 +115,4 @@ function ApplicationForm({onApply}){
 }
 
     
-export default ApplicationForm
+export default InquiryForm

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { UserContext } from './context/UserProvider';
 import { useNavigate } from 'react-router-dom';
-import JobApplicationForm from './JobApplicationForm';
+import InquiryForm from './InquiryForm';
 
 
 function JobDetails({job}){

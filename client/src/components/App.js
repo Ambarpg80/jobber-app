@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import JobList from "./JobList"
 import NavBar from "./NavBar"
 import LoginForm from "./LoginForm"
-import JobApplicationForm from './JobApplicationForm'
+import InquiryForm from './InquiryForm'
 import { UserProvider } from './context/UserProvider';
 import UserPage from './UserPage'; 
 import Welcome from './Welcome';
