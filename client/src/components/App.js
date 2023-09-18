@@ -25,10 +25,11 @@ function App() {
 
 
  function handleNewApplication(newInquiry){
-  const job = allJobs.find(job => job.id === newInquiry.post_id ? job : null)
+  const job = allJobs.find(j=> j.id === newInquiry.post_id)
   const newApplicationList = [...job.inquiries, newInquiry]    //add inquiry to the single post's list of inquiries
-  job.inquiries = newApplicationList  //set the current applications list to the new applications list
-  setAllJobs([...allJobs])
+  const jobCopy = {...job, inquiries: newApplicationList} //set the current applications list to the new applications list
+ const newJobs =  allJobs.map(oneJob => jobCopy.id === oneJob.id ? jobCopy : oneJob )
+  setAllJobs(newJobs)
  }
 
  function deleteApplication(item){
