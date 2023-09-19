@@ -31,11 +31,11 @@ function Inquiry({inquiry, job, onDelete, onInquiryUpdate }){
             </summary>
               <div className='grid' >
                 <p>Name: {inquiry.name}</p><br/>
-                <p>Address: {inquiry.address}</p>
-                <p>Email: {inquiry.email}</p>
-                <p>Phone: {inquiry.phone}</p>
-                <p>Skills: {inquiry.skills}</p>
-                <p>Education: {inquiry.education}</p>
+                <p>Address: {inquiry.address}</p><br/>
+                <p>Email: {inquiry.email}</p><br/>
+                <p>Phone Number: {inquiry.phone_number}</p><br/>
+                <p>Skills: {inquiry.skills}</p><br/>
+                <p>Education: {inquiry.education}</p><br/>
                 <p>About: {inquiry.about}</p>
               </div>
           </details>
