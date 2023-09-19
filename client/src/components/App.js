@@ -92,7 +92,7 @@ function App() {
               <Route path="/posts/:id/inquiries" 
                      element={ <InquiryForm onApply={handleNewApplication} /> } 
               />
-
+              <Route path="*" element={<Welcome  />}/>
           </Routes>
         </UserProvider>
         </div>
