@@ -21,8 +21,10 @@ class PostsController < ApplicationController
 
     def update
         job = Post.find(params[:id])
-        job.update(job_params)
+        job.update!(job_params)
+        if job
         render json: job, status: :accepted
+        end
     end
 
     def destroy

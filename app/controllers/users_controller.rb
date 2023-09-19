@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     def update #update user info
         user = current_user
         user.update(user_params)
-        if user.valid?
+        if user
           render json: user, status: :accepted
         end
     end

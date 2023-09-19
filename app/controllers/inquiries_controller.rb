@@ -10,16 +10,17 @@ class InquiriesController < ApplicationController
         if new_inquiry.valid?
          render json: new_inquiry, status: :created
         else
-         render json: {errors: new_inquiry.errors.full_messages}, status: :unprocessable_entity
+         render json: {errors: [new_inquiry.errors.full_messages]}, status: :unprocessable_entity
       end
    end
 
    def update
       user = current_user
-      inquiry = user.inquiries.find_by(id: params[:id])
-      if user
-      inquiry.update(inquiry_params)
-      render json: inquiry, status: :accepted
+      inquiry = user.inquiries.find(params[:id])
+      inquiry.update!(inquiry_params)
+      byebug
+      if inquiry
+         render json: inquiry, status: :accepted
       end
    end
 
