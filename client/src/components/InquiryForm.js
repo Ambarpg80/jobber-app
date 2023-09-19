@@ -3,8 +3,8 @@ import { UserContext } from "./context/UserProvider";
 import { useParams, useNavigate } from "react-router-dom";
 
 
-function InquiryForm({onApply}){
-    const jobId = useParams();
+function InquiryForm({onApply, job}){
+    const jobId = useParams()
     const navigate = useNavigate();
     const [applicationError, setApplicationError] = useState("")
     const {currentUser} = useContext(UserContext); 

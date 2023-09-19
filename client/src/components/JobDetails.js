@@ -11,7 +11,7 @@ function JobDetails({job}){
   
   function handleApplication(){
    navigate(`/posts/${job.id}/inquiries`) 
-    return <JobApplicationForm />
+    return <InquiryForm />
   } 
 
 

@@ -1,7 +1,9 @@
-import React from 'react'
+import InquiryEditForm from "./InquiryEditForm"
+import React, {useState} from 'react'
 
 
-function Inquiry({inquiry, job, onDelete }){
+function Inquiry({inquiry, job, onDelete, onInquiryUpdate }){
+  const[displayEditForm, setDisplayEditForm] = useState(false)
 
     function handleDelete(e){
       e.preventDefault()
@@ -11,9 +13,17 @@ function Inquiry({inquiry, job, onDelete }){
       .then(onDelete(inquiry))
     }
       
+    function handleEditForm(){
+      setDisplayEditForm(!displayEditForm)
+    }
+
 
     return (
-        <div className="container">
+        <div className="container" style={{padding: "10%"}}>
+        {displayEditForm ?
+         <InquiryEditForm job={job} inquiry={inquiry} onInquiryUpdate={onInquiryUpdate}/>
+         :
+          <div>
           <details>
             <summary>
               <h2> {job.title} </h2> 
@@ -29,7 +39,10 @@ function Inquiry({inquiry, job, onDelete }){
                 <p>About: {inquiry.about}</p>
               </div>
           </details>
-          <button style={{width: "200px", marginLeft: "25%"}} onClick={handleDelete} type="button"> Withdraw Application </button> 
+          <button style={{width: "180px", margin: "2%"}} onClick={handleDelete} type="button"> Withdraw Application </button> 
+          </div>}
+             <button  onClick={handleEditForm} type="button"> Update Application </button> 
+        
         </div>
     )
    

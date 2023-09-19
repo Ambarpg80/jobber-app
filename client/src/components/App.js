@@ -1,5 +1,5 @@
 import '../App.css';
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes, useParams} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import JobList from "./JobList"
 import NavBar from "./NavBar"
@@ -15,7 +15,7 @@ import LoginEditForm from './LoginEditForm';
 function App() {
   const [allJobs, setAllJobs] = useState([]);
   const [search, setSearch] = useState("")
-  
+
   useEffect(() => {
     fetch("/posts")
       .then(res => res.json())
@@ -33,12 +33,21 @@ function App() {
  }
 
  function deleteApplication(item){
-  const job = allJobs.find(job => job.id === item.post_id ? job : null)//find job that matches item
-  const filteredInquiries = job.inquiries.filter(inquiry => inquiry.id !== item.id ) //filter and return the applications that don't match the item to be deleted
-  job.inquiries = filteredInquiries // set the job.inquiries list to the newly filtered Inquiries
-  setAllJobs([...allJobs]) 
+  const singleJob = allJobs.find(job => job.id === item.post_id)//find job that matches item's post_id
+  const filteredInquiries = singleJob.inquiries.filter(inquiry => inquiry.id !== item.id ) //filter and return the inquiry that doesn't match the item to be deleted
+  const filteredSingleJob = {...singleJob, inquiries: filteredInquiries}// add filtered inquiries list to copy of single job
+  const filterdJobList= allJobs.map(jb => jb.id === filteredSingleJob.id ? filteredSingleJob : jb)
+  setAllJobs(filterdJobList) 
   }
   
+  function handleInquiryUpdate(updatedItem){
+   const jobToUpdate = allJobs.find(jb => jb.id === updatedItem.post_id)
+   const inquiries = jobToUpdate.inquiries
+   const updatedInquiry = inquiries.map(inq => inq.id === updatedItem.id ? updatedItem : inq )
+   const updatedJob= {...jobToUpdate, inquiries: updatedInquiry} 
+   const updateJobsList = allJobs.map(jbs => jbs.id === updatedJob.id ? updatedJob : jbs)
+   setAllJobs(updateJobsList)
+  }
 
      const filteredList = allJobs.filter( job => job.title.toLowerCase().includes(search.toLowerCase()) )
     
@@ -55,6 +64,7 @@ function App() {
               <Route path="/me" 
                      element={ <UserPage allJobs={allJobs} 
                                          onDelete={deleteApplication} 
+                                         onInquiryUpdate={handleInquiryUpdate}
                                          search={search} 
                                          setSearch={setSearch}  
                                          filteredList={filteredList} /> } 
@@ -80,14 +90,14 @@ function App() {
               />
 
               <Route path="/posts/:id/inquiries" 
-                     element={ <JobApplicationForm onApply={handleNewApplication} /> } 
+                     element={ <InquiryForm onApply={handleNewApplication} /> } 
               />
 
           </Routes>
         </UserProvider>
         </div>
     );
-  // }
+  
 }
          
     
