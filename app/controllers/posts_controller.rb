@@ -13,9 +13,8 @@ class PostsController < ApplicationController
     end
 
     def create  
-        user = current_user
         new_post = Post.create(job_params)
-        if user && job_post.valid?
+        if new_post.valid?
            render json: new_post, status: :created
           end
     end
