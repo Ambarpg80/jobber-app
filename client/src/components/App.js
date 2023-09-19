@@ -43,9 +43,9 @@ function App() {
   function handleInquiryUpdate(updatedItem){
    const jobToUpdate = allJobs.find(jb => jb.id === updatedItem.post_id)
    const inquiries = jobToUpdate.inquiries
-   const updatedInquiry = inquiries.map(inq => inq.id === updatedItem.id ? updatedItem : inq )
-   const updatedJob= {...jobToUpdate, inquiries: updatedInquiry} 
-   const updateJobsList = allJobs.map(jbs => jbs.id === updatedJob.id ? updatedJob : jbs)
+   const updatedInquiries = inquiries.map(inq => inq.id === updatedItem.id ? updatedItem : inq )
+   const updatedJob= {...jobToUpdate, inquiries: updatedInquiries} 
+   const updateJobsList = allJobs.map(j => j.id === updatedJob.id ? updatedJob : j)
    setAllJobs(updateJobsList)
   }
 
