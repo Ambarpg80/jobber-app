@@ -21,7 +21,7 @@ function Inquiry({inquiry, job, onDelete, onInquiryUpdate }){
     return (
         <div className="container" style={{padding: "10%"}}>
         {displayEditForm ?
-         <InquiryEditForm job={job} inquiry={inquiry} onInquiryUpdate={onInquiryUpdate}/>
+         <InquiryEditForm job={job} inquiry={inquiry} onInquiryUpdate={onInquiryUpdate} displayEditForm={displayEditForm} setDisplayEditForm={setDisplayEditForm}/>
          :
           <div>
           <details>

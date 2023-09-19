@@ -1,5 +1,5 @@
 import '../App.css';
-import { Route, Routes, useParams} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import JobList from "./JobList"
 import NavBar from "./NavBar"

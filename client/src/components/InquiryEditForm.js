@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { UserContext } from './context/UserProvider';
 
-function InquiryEditForm({job, inquiry, onInquiryUpdate}){
+function InquiryEditForm({job, inquiry, onInquiryUpdate, displayEditForm, setDisplayEditForm}){
      const {currentUser} = useContext(UserContext);
      const [editError, setEditError] = useState("")
      const [formUpdate, setFormUpdate] = useState({
@@ -37,7 +37,8 @@ function InquiryEditForm({job, inquiry, onInquiryUpdate}){
          })
            .then(res => {
              if(res.ok){
-               res.json().then(data=> onInquiryUpdate(data))
+               res.json().then(data=> {onInquiryUpdate(data)
+                                      setDisplayEditForm(!displayEditForm)})
              }else{
                res.json().then(err=> setEditError(err.errors.map(error => <li>{error}</li>)))
              }
