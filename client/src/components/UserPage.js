@@ -5,7 +5,7 @@ import JobList from './JobList'
 import SearchBar from './SearchBar'
 
 
-function UserPage({allJobs, onDelete, search ,setSearch, filteredList}){
+function UserPage({allJobs, onDelete,onInquiryUpdate, search ,setSearch, filteredList}){
   const {currentUser, isLoggedIn} = useContext(UserContext)
   
   const styleJobList = { maxWidth: "60%", float: "left"}
@@ -37,7 +37,7 @@ function UserPage({allJobs, onDelete, search ,setSearch, filteredList}){
           {allJobs.map(job => 
             job.inquiries.map(inquiry => inquiry.user_id === currentUser.id ?
                 <div key={inquiry.id}> 
-                  <Inquiry inquiry={inquiry} job={job} onDelete={onDelete} />
+                  <Inquiry inquiry={inquiry} job={job} onDelete={onDelete} onInquiryUpdate={onInquiryUpdate}/>
                 </div> : null )
           )}
         </div> 
