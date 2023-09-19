@@ -7,6 +7,31 @@ class PostsController < ApplicationController
         render json: jobs,  status: :ok
     end 
 
+    def show
+        single_job = Post.find(params[:id])
+        render json: single_job, status: :ok
+    end
+
+    def create  
+        user = current_user
+        new_post = Post.create(job_params)
+        if user && job_post.valid?
+           render json: new_post, status: :created
+          end
+    end
+
+    def update
+        job = Post.find(params[:id])
+        job.update(job_params)
+        render json: job, status: :accepted
+    end
+
+    def destroy
+        job = Post.find(params[:id])
+        job.destroy
+        head :no_content
+    end
+
     private
 
     def job_params

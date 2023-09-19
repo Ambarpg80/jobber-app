@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
-  resources :posts, only: :index         #shows all the posts       
-  resources :users, only: :update  #update user info
-  resources :inquiries, only: [:create, :destroy]
+  resources :posts, only: [:index, :create, :show, :update, :destroy]         #shows all the posts       
+  resources :users, only: [:index, :update]  #update user info
+  resources :inquiries, only: [:index, :create, :update, :destroy]
 
   get "/me", to: "users#show"          #automatically signs user in
   post "/signup", to: "users#create"    #creates a user account

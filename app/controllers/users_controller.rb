@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
     skip_before_action :authorized, only: :create
 
+    def index
+      render json: User.all, status: :ok
+    end
+
 
     def show # /me Route
         user = current_user
         if user
-        render json: user, include: [:posts, :inquiries], status: :ok
+        render json: user, status: :ok
         end
     end
 

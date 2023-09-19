@@ -1,20 +1,33 @@
 class InquiriesController < ApplicationController
+   
+   def index
+      render json: Inquiry.all, status: :ok
+   end
 
-
-     def create
-        inquiry = Inquiry.create(inquiry_params)
-        if inquiry.valid?
-        render json: inquiry, status: :created
+   def create
+      user= current_user
+      new_inquiry = user.inquiries.create(inquiry_params)
+        if new_inquiry.valid?
+         render json: new_inquiry, status: :created
         else
-         render json: {errors: inquiry.errors.full_messages}, status: :unprocessable_entity
-        end
-     end
+         render json: {errors: new_inquiry.errors.full_messages}, status: :unprocessable_entity
+      end
+   end
 
-     def destroy
-        inquiry = Inquiry.find_by(id: params[:id])
-        inquiry.destroy
-        head :no_content
-     end
+   def update
+      user = current_user
+      inquiry = user.inquiries.find_by(id: params[:id])
+      if user
+      inquiry.update(inquiry_params)
+      render json: inquiry, status: :accepted
+      end
+   end
+
+   def destroy
+      inquiry = Inquiry.find_by(id: params[:id])
+      inquiry.destroy
+      head :no_content
+   end
 
      private
 
