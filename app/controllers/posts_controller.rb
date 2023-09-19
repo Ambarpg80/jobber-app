@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     def update
         job = Post.find(params[:id])
         job.update!(job_params)
-        if job
+        if job.valid?
         render json: job, status: :accepted
         end
     end

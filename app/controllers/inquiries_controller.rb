@@ -18,7 +18,6 @@ class InquiriesController < ApplicationController
       user = current_user
       inquiry = user.inquiries.find(params[:id])
       inquiry.update!(inquiry_params)
-      byebug
       if inquiry
          render json: inquiry, status: :accepted
       end

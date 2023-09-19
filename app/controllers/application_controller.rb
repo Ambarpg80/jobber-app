@@ -16,9 +16,9 @@ class ApplicationController < ActionController::API
         return render json: { error: "Not Authorized. Please Login or Sign up" }, status: :unauthorized unless user
     end
 
-    def render_unprocessable_entity
-        user = current_user
-        render json: {errors: [user.error.full_messages]}, status: :unprocessable_entity
+    def render_unprocessable_entity(exception)
+        # user = current_user
+        render json: {errors: [exception.record.errors.full_messages]}, status: :unprocessable_entity
     end
 
    def render_not_found(exception)

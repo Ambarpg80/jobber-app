@@ -40,7 +40,7 @@ function InquiryEditForm({job, inquiry, onInquiryUpdate, displayEditForm, setDis
                res.json().then(data=> {onInquiryUpdate(data)
                                       setDisplayEditForm(!displayEditForm)})
              }else{
-               res.json().then(err=> setEditError(err.errors.map(error => <li>{error}</li>)))
+               res.json().then(err=> setEditError(err.errors.map(error => <li key={error}>{error}</li>)))
              }
            })
          }
