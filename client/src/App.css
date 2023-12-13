@@ -13,7 +13,8 @@ body {
   color:rgb(0, 0, 123); 
   font-size: 60px;
   align-items: center;
-  margin-left: 30%;  
+  text-align: center;
+  
 }
 .rightImage {float: right; 
   height: 700px;

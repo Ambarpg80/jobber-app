@@ -8,7 +8,7 @@ return(
         <h1 id="welcome"> Welcome to JobLancer</h1>
 
       <div className="rightImage">
-        <h1 style={{padding: "150px"}}>The way that we work <br/> is changing everyday</h1>
+        <h1 style={{padding: "15%"}}>The way that we work <br/> is changing everyday</h1>
       </div>
       <div >
         <img className="leftImage" src="https://www.apa.org/images/hero-work-wellbeing-2022_tcm7-307273.jpg" alt="people working different jobs"></img>
